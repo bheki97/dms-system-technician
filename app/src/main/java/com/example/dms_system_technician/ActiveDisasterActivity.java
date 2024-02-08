@@ -4,6 +4,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import com.example.dms_system_technician.recycler.active_disaster.ActiveDisaster
 import com.example.dms_system_technician.retrofit.DmsServerAPI;
 import com.example.dms_system_technician.retrofit.RetrofitService;
 import com.example.dms_system_technician.technician_holder.TechnicianHolder;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -83,7 +85,7 @@ public class ActiveDisasterActivity extends AppCompatActivity {
                             if(response.code()==200 && response.body()){
                                 binding.attendOrCompleteBtn.setClickable(false);
                                 dtoHolder.getReportDto().setTechnicianAttendDate(new Timestamp(System.currentTimeMillis()));
-
+                                confirmAttendance();
                             }
                         }
 
@@ -95,6 +97,36 @@ public class ActiveDisasterActivity extends AppCompatActivity {
         });
     }
 
+    private void confirmComplete(){
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this);
+
+        builder.setTitle("Complete Alert");
+        builder.setMessage("Well Done! You have now Resolved the Disaster. Thank you for reaching out " +
+                "to the needs of the Community");
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        builder.create().show();
+    }
+    private void confirmAttendance(){
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this);
+
+        builder.setTitle("Attend Alert");
+        builder.setMessage("Great!, You can now start working. The community's well being lies in your Hands");
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        builder.create().show();
+    }
+
     private void setToAttendDisaster() {
         binding.attendOrCompleteBtn.setOnClickListener(v ->{
             dmsServerAPI.attendDisaster(this.dtoHolder.getReportDto().getDisasterReportId())
@@ -103,7 +135,7 @@ public class ActiveDisasterActivity extends AppCompatActivity {
                         public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                             if(response.code()==200 && response.body()){
                                 binding.attendOrCompleteBtn.setText("COMPLETE");
-
+                                confirmComplete();
                             }
                         }
 

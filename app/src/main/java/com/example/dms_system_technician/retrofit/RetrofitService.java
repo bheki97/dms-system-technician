@@ -16,6 +16,7 @@ public class RetrofitService {
 
     }
     public static RetrofitService getInstance(){
+
         if(instance==null){
             instance = new RetrofitService();
         }

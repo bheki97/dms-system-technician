@@ -18,6 +18,14 @@ public class ActiveDisasterRecycler extends RecyclerView.Adapter<ActiveDisasterH
     public ActiveDisasterRecycler() {
     }
 
+    public List<DisasterDto> getDisasters() {
+        return disasters;
+    }
+
+    public void setDisasters(List<DisasterDto> disasters) {
+        this.disasters = disasters;
+    }
+
     public ActiveDisasterRecycler(List<DisasterDto> disasters) {
         this.disasters = disasters;
     }

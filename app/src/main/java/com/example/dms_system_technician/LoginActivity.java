@@ -40,11 +40,14 @@ public class LoginActivity extends AppCompatActivity {
 
 //            sendLoginRequest(dto);
 
-            TechnicianHolder.build(new TechnicianHolder(
-                    1,2,"Bheki","Mautjana",
-                    "abc@gmail.com","+27760794703",
-                    1,2,"Eskom","Electrician",
-                    ""));
+            TechnicianHolder.build(new TechnicianHolder(4,
+                    4,
+                    "Aubrey", "Mashaba",
+                    "123abc@gmail.com","+760794703",
+                    2,4,
+                    "Water and Sanitation",
+                    "Plumber",""
+            ));
 
             startActivity(new Intent(this,MainActivity.class));
             finish();

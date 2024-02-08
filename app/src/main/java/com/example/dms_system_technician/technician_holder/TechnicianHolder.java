@@ -9,6 +9,19 @@ public class TechnicianHolder extends TechnicianDto {
    private static TechnicianHolder instance;
 
     public static TechnicianHolder getInstance() {
+
+        if(instance==null){
+            instance = new TechnicianHolder(4,
+                    4,
+                    "Aubrey", "Mashaba",
+                    "123abc@gmail.com","+760794703",
+                    2,4,
+                    "Water and Sanitation",
+                    "Plumber",""
+                    );
+        }
+
+
         return instance;
     }
 

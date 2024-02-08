@@ -2,7 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:elevation="4dp"
+    android:background="@drawable/rounded_panel_wrapper"
     android:layout_margin="4dp"
+    android:padding="4dp"
+    android:paddingBottom="4dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <ImageView

@@ -1,4 +1,4 @@
-package com.example.dms_system_technician;
+package com.example.dms_system_technician.dto;
 
 import com.example.dms_system_technician.enums.DisasterType;
 

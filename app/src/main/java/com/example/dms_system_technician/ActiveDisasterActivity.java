@@ -1,6 +1,8 @@
 package com.example.dms_system_technician;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,14 +14,22 @@ import com.example.dms_system_technician.dto.DisasterDto;
 import com.example.dms_system_technician.dto.ReporterDto;
 import com.example.dms_system_technician.enums.DisasterType;
 import com.example.dms_system_technician.recycler.active_disaster.ActiveDisasterHolder;
+import com.example.dms_system_technician.retrofit.DmsServerAPI;
+import com.example.dms_system_technician.retrofit.RetrofitService;
+import com.example.dms_system_technician.technician_holder.TechnicianHolder;
 
 import java.sql.Timestamp;
 import java.util.Date;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ActiveDisasterActivity extends AppCompatActivity {
 
     private ActivityActiveDisasterBinding binding;
     private DisasterDto dtoHolder;
+    private DmsServerAPI dmsServerAPI;
 
 
     @Override
@@ -29,6 +39,15 @@ public class ActiveDisasterActivity extends AppCompatActivity {
         binding = ActivityActiveDisasterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        dmsServerAPI = RetrofitService.getInstance().getRetrofit().create(DmsServerAPI.class);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
     }
 
@@ -57,13 +76,42 @@ public class ActiveDisasterActivity extends AppCompatActivity {
 
     private void setToCompleteDisaster() {
         binding.attendOrCompleteBtn.setOnClickListener(v ->{
+            dmsServerAPI.completeDisaster(this.dtoHolder.getReportDto().getDisasterReportId())
+                    .enqueue(new Callback<Boolean>() {
+                        @Override
+                        public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                            if(response.code()==200 && response.body()){
+                                binding.attendOrCompleteBtn.setClickable(false);
+                                dtoHolder.getReportDto().setTechnicianAttendDate(new Timestamp(System.currentTimeMillis()));
 
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Boolean> call, Throwable t) {
+
+                        }
+                    });
         });
     }
 
     private void setToAttendDisaster() {
         binding.attendOrCompleteBtn.setOnClickListener(v ->{
+            dmsServerAPI.attendDisaster(this.dtoHolder.getReportDto().getDisasterReportId())
+                    .enqueue(new Callback<Boolean>() {
+                        @Override
+                        public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                            if(response.code()==200 && response.body()){
+                                binding.attendOrCompleteBtn.setText("COMPLETE");
 
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Boolean> call, Throwable t) {
+
+                        }
+                    });
         });
     }
 

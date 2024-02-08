@@ -17,5 +17,11 @@
         android:label="@string/title_history"
         tools:layout="@layout/fragment_dashboard" />
 
+    <fragment
+            android:id="@+id/navigation_profile"
+            android:name="com.example.dms_system_technician.ui.notifications.NotificationsFragment"
+            android:label="@string/title_profile"
+            tools:layout="@layout/fragment_notifications" />
 
+>
 </navigation>

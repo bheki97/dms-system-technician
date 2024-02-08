@@ -53,7 +53,13 @@ public class ActiveDisasterHolder extends RecyclerView.ViewHolder {
 
     private void setStatus(Timestamp technicianAttendDate) {
 
-        if(technicianAttendDate!=null){
+        if(technicianAttendDate==null){
+            binding.statusImg.setImageDrawable(
+                    ResourcesCompat.getDrawable(binding.getRoot().getResources(), R.drawable.outline_dangerous_24,null)
+            );
+            binding.statusTxt.setText("UNATTENDED");
+            binding.statusTxt.setTextColor(ContextCompat.getColor(binding.getRoot().getContext(),R.color.unattended));
+        }else{
             binding.statusImg.setImageDrawable(
                     ResourcesCompat.getDrawable(binding.getRoot().getResources(), R.drawable.outline_run_circle_24,null)
             );

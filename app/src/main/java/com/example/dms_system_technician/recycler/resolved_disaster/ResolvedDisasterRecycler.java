@@ -6,10 +6,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.dms_system_technician.ResolvedDisasterDto;
-import com.example.dms_system_technician.databinding.HolderActiveDisasterBinding;
 import com.example.dms_system_technician.databinding.HolderResolvedDisasterBinding;
-import com.example.dms_system_technician.recycler.active_disaster.ActiveDisasterHolder;
+import com.example.dms_system_technician.dto.ResolvedDisasterDto;
 
 import java.util.List;
 
@@ -19,6 +17,14 @@ public class ResolvedDisasterRecycler extends RecyclerView.Adapter<ResolvedDisas
 
 
     public ResolvedDisasterRecycler() {
+    }
+
+    public List<ResolvedDisasterDto> getResolvedDisasters() {
+        return resolvedDisasters;
+    }
+
+    public void setResolvedDisasters(List<ResolvedDisasterDto> resolvedDisasters) {
+        this.resolvedDisasters = resolvedDisasters;
     }
 
     public ResolvedDisasterRecycler(List<ResolvedDisasterDto> resolvedDisasters) {

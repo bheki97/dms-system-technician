@@ -8,8 +8,8 @@ import android.util.Base64;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.dms_system_technician.ResolvedDisasterDto;
 import com.example.dms_system_technician.databinding.HolderResolvedDisasterBinding;
+import com.example.dms_system_technician.dto.ResolvedDisasterDto;
 import com.example.dms_system_technician.enums.DisasterType;
 import com.example.dms_system_technician.recycler.active_disaster.ActiveDisasterHolder;
 

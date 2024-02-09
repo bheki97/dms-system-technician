@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Base64;
 
@@ -17,7 +19,6 @@ import com.example.dms_system_technician.enums.DisasterType;
 import com.example.dms_system_technician.recycler.active_disaster.ActiveDisasterHolder;
 import com.example.dms_system_technician.retrofit.DmsServerAPI;
 import com.example.dms_system_technician.retrofit.RetrofitService;
-import com.example.dms_system_technician.technician_holder.TechnicianHolder;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.sql.Timestamp;
@@ -59,8 +60,27 @@ public class ActiveDisasterActivity extends AppCompatActivity {
         super.onResume();
         this.dtoHolder = DisasterDto.getInstance();
         setUpTheFields();
+        setStartCallIntent();
+        setStartSearchLocationIntent();
         toggleAttendOrAttendBtn();
 
+    }
+
+    private void setStartSearchLocationIntent() {
+        binding.mapImgBtn.setOnClickListener( v ->{
+            Uri geoUri = Uri.parse("geo:" + dtoHolder.getLatitude() + "," + dtoHolder.getLongitude());
+
+            startActivity(Intent.createChooser(new Intent(Intent.ACTION_VIEW, geoUri),"Open With: "));
+
+        });
+    }
+
+    private void setStartCallIntent() {
+        binding.callImgBtn.setOnClickListener( v->{
+            Intent intent = new Intent(Intent.ACTION_DIAL);
+            intent.setData(Uri.parse("tel:" + dtoHolder.getReporter().getCellNo()));
+            startActivity(intent);
+        });
     }
 
     private void toggleAttendOrAttendBtn() {
@@ -85,7 +105,7 @@ public class ActiveDisasterActivity extends AppCompatActivity {
                             if(response.code()==200 && response.body()){
                                 binding.attendOrCompleteBtn.setClickable(false);
                                 dtoHolder.getReportDto().setTechnicianAttendDate(new Timestamp(System.currentTimeMillis()));
-                                confirmAttendance();
+                                confirmAlertComplete();
                             }
                         }
 
@@ -97,7 +117,7 @@ public class ActiveDisasterActivity extends AppCompatActivity {
         });
     }
 
-    private void confirmComplete(){
+    private void confirmAlertComplete(){
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this);
 
         builder.setTitle("Complete Alert");
@@ -135,7 +155,7 @@ public class ActiveDisasterActivity extends AppCompatActivity {
                         public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                             if(response.code()==200 && response.body()){
                                 binding.attendOrCompleteBtn.setText("COMPLETE");
-                                confirmComplete();
+                                confirmAttendance();
                             }
                         }
 

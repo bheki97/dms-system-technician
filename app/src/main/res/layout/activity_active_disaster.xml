@@ -168,6 +168,7 @@
 
                     </LinearLayout>
 
+
                 </LinearLayout>
 
                 <View
@@ -246,6 +247,14 @@
                             android:text="Thembisile Hani"/>
 
                     </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="40dp"
+                        android:id="@+id/mapImgBtn"
+                        android:src="@drawable/outline_map_24"/>
 
                 </LinearLayout>
 
@@ -339,6 +348,13 @@
                             android:text="076 079 4703"/>
 
                     </LinearLayout>
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="40dp"
+                        android:id="@+id/callImgBtn"
+                        android:src="@drawable/baseline_phone_enabled_24"/>
                 </LinearLayout>
 
                 <View
@@ -376,6 +392,13 @@
                             android:text="bfmokoena7@gmail.com"/>
 
                     </LinearLayout>
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="40dp"
+                        android:id="@+id/emailImgBtn"
+                        android:src="@drawable/outline_send_24"/>
                 </LinearLayout>
 
 

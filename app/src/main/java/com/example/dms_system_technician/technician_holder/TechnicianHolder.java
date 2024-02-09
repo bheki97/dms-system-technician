@@ -14,7 +14,7 @@ public class TechnicianHolder extends TechnicianDto {
             instance = new TechnicianHolder(4,
                     4,
                     "Aubrey", "Mashaba",
-                    "123abc@gmail.com","+760794703",
+                    "123abc@gmail.com","+27760794703",
                     2,4,
                     "Water and Sanitation",
                     "Plumber",""

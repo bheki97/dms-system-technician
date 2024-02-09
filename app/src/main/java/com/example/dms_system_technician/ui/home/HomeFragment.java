@@ -69,6 +69,11 @@ public class HomeFragment extends Fragment {
                             List<DisasterDto> list = new ArrayList<>();
                             System.out.println("Got All disasters: "+list.size());
                             Collections.addAll(list, response.body());
+
+                            if(list.isEmpty()){
+                                binding.nothingHereLayout.setVisibility(View.VISIBLE);
+                            }
+
                             activeDisasterRecycler.setDisasters(list);
                             binding.activeDisastersRecycler.setAdapter(activeDisasterRecycler);
 

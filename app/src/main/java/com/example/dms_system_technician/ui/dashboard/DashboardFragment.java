@@ -65,6 +65,11 @@ public class DashboardFragment extends Fragment {
 
                             List<ResolvedDisasterDto> list = new ArrayList<>();
                             Collections.addAll(list, response.body());
+
+                            if (list.isEmpty()){
+                                binding.nothingHereLayout.setVisibility(View.VISIBLE);
+                            }
+
                             resolvedDisasterRecycler.setResolvedDisasters(list);
                             binding.historyDisastersRecycler.setAdapter(resolvedDisasterRecycler);
 
